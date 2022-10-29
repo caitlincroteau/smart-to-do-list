@@ -5,24 +5,21 @@
  * See: https://expressjs.com/en/guide/using-middleware.html#middleware.router
  */
 
-const express = require('express');
+const express = require("express");
 const router = express.Router();
 
 module.exports = (db) => {
   router.get("/", (req, res) => {
-    db.query(`SELECT name from users WHERE id = $1`, [req.session.userId])
-      .then(data => {
-        // res.send(data.rows[0]);
-        console.log(data.rows[0]);
-        const name = data.rowCount > 0 ? data.rows[0].name : 'User';
-        res.render('index', { name });
-      });
+    db.query(`SELECT name from users WHERE id = $1`, [req.session.userId]).then(
+      (data) => {
+        const name = data.rowCount > 0 ? data.rows[0].name : "User";
+        res.render("index", { name });
+      }
+    );
   });
 
-  // All good layout! -caitlin says
   router.get("/lists/:id", (req, res) => {
     //grab id
-    console.log("i got here")
     const { id } = req.params;
     const templateVars = { id };
 
@@ -30,23 +27,23 @@ module.exports = (db) => {
     res.render("list", templateVars);
   });
 
-  // TEMPORTARY FOR LAYOUT TESTING
-  router.get("/task_edit_modal", (req, res) => {
-    console.log('Hello Edit Task Modal!');
-    res.render("task_edit_modal");
-  });
+  // // TEMPORTARY FOR LAYOUT TESTING
+  // router.get("/task_edit_modal", (req, res) => {
+  //   console.log('Hello Edit Task Modal!');
+  //   res.render("task_edit_modal");
+  // });
 
-  // TEMPORTARY FOR LAYOUT TESTING
-  router.get("/task_create_modal", (req, res) => {
-    console.log('Hello Create Task Modal!');
-    res.render("task_create_modal");
-  });
+  // // TEMPORTARY FOR LAYOUT TESTING
+  // router.get("/task_create_modal", (req, res) => {
+  //   console.log('Hello Create Task Modal!');
+  //   res.render("task_create_modal");
+  // });
 
-  // TEMPORTARY FOR LAYOUT TESTING
-  router.get("/list_create_modal", (req, res) => {
-    console.log('Hello Create List Modal!');
-    res.render("list_create_modal");
-  });
+  // // TEMPORTARY FOR LAYOUT TESTING
+  // router.get("/list_create_modal", (req, res) => {
+  //   console.log('Hello Create List Modal!');
+  //   res.render("list_create_modal");
+  // });
 
   return router;
 };

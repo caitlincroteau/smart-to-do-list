@@ -1,4 +1,4 @@
-$font-family: 'Roboto', sans-serif;
+$font-family: "Roboto", sans-serif;
 $background-color: #d9d9d9;
 $font-color: black;
 
@@ -9,10 +9,12 @@ $font-color: black;
   flex-direction: column;
 }
 
-a:visited, a:link, a:active {
+a:visited,
+a:link,
+a:active {
   text-decoration: none;
   color: black;
-};
+}
 
 a:hover {
   color: #3a3a3a;
@@ -21,7 +23,7 @@ a:hover {
 
 button {
   background-color: #fcde67;
-  cursor:pointer;
+  cursor: pointer;
 }
 
 button:hover {
@@ -31,7 +33,7 @@ button:hover {
 .list_header {
   height: 150px;
   padding: 2em;
-  margin-top: 20px
+  margin-top: 20px;
 }
 
 .list_container {
@@ -92,7 +94,6 @@ article {
 .modal-link:hover {
   background: aqua;
 }
-
 
 #task_count {
   color: brown;

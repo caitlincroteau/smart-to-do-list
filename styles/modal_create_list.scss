@@ -1,5 +1,5 @@
 body {
-  font-family: 'Roboto', sans-serif;
+  font-family: "Roboto", sans-serif;
   font-size: 18px;
   line-height: 2;
 }
@@ -18,7 +18,7 @@ body {
   // enables scroll if content is too big
   overflow: auto;
   // use rgba to set opacity
-  background-color: rgba(0, 0, 0, 0.6) /* color with 60% opacity */
+  background-color: rgba(0, 0, 0, 0.6); /* color with 60% opacity */
 }
 
 .list-modal-content {
@@ -42,4 +42,3 @@ body {
   color: darkred;
   cursor: pointer;
 }
-

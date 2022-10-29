@@ -1,5 +1,4 @@
-// comment
-const bcrypt = require('bcrypt');
+const bcrypt = require("bcrypt");
 
 /*
  * All routes for Users are defined here
@@ -8,96 +7,105 @@ const bcrypt = require('bcrypt');
  * See: https://expressjs.com/en/guide/using-middleware.html#middleware.router
  */
 
-const express = require('express');
+const express = require("express");
 const router = express.Router();
 
 module.exports = (db) => {
   // login routes
-  router.post('/login', (req, res) => {
+  router.post("/login", (req, res) => {
     // const { email, password } = req.body;
-    const email = 'billywong@outlook.com';
-    const password = 'password';
+
+    //for demo purposes
+    const email = "billywong@outlook.com";
+    const password = "password";
 
     db.query(`SELECT * FROM users WHERE email = $1`, [email])
-      .then(data => {
-        if (data.rowCount > 0 && bcrypt.compareSync(password, data.rows[0].password)) {
-          // console.log(data.rows[0]);
+      .then((data) => {
+        if (
+          data.rowCount > 0 &&
+          bcrypt.compareSync(password, data.rows[0].password)
+        ) {
           req.session.userId = data.rows[0].id; // set cookies
-          res.redirect('/');
+          res.redirect("/");
         } else {
-          res.status(400).send('<h1>Please check your email and password</h1>');
+          res.status(400).send("<h1>Please check your email and password</h1>");
         }
-      }).catch(err => {
-        res
-          .status(500)
-          .json({ error: err.message });
+      })
+      .catch((err) => {
+        res.status(500).json({ error: err.message });
       });
   });
 
-  router.post('/logout', (req, res) => {
+  router.post("/logout", (req, res) => {
     req.session = null; // remove browser cookies
-    res.redirect('/');
-
+    res.redirect("/");
   });
 
-  router.get('/login', (req, res) => {
+  router.get("/login", (req, res) => {
     if (req.session.userId) {
       db.query(`SELECT * FROM users WHERE id = $1`, [req.session.userId])
-        .then(data => res.send(data.rows[0]))
-        .catch(err => {
-          res
-            .status(500)
-            .json({ error: err.message });
+        .then((data) => res.send(data.rows[0]))
+        .catch((err) => {
+          res.status(500).json({ error: err.message });
         });
     } else {
-      res.status(400).send('<h1>Please log in.</h1>');
-    };
+      res.status(400).send("<h1>Please log in.</h1>");
+    }
   });
 
   // register routes
-  router.post('/register', (req, res) => {
+  router.post("/register", (req, res) => {
     // const {name, email, password, avatar_url} = req.body
-    const [name, email, password, avatar_url] = ['Jon Smith', 'jon-smith99@hotmail.com', 'myPassword', null];
 
-    if (!name || !email || !password) return res.status(400).send('<h1>Please fill in all necessary fields.</h1>');
+    //for demo purposes
+    const [name, email, password, avatar_url] = [
+      "Jon Smith",
+      "jon-smith99@hotmail.com",
+      "myPassword",
+      null,
+    ];
+
+    if (!name || !email || !password)
+      return res
+        .status(400)
+        .send("<h1>Please fill in all necessary fields.</h1>");
 
     db.query(`SELECT * FROM users WHERE email = $1`, [email])
-      .then(data => {
+      .then((data) => {
         if (data.rowCount > 0) {
-          return res.status(400).send('<h1>This email has been registered.</h1>');
+          return res
+            .status(400)
+            .send("<h1>This email has been registered.</h1>");
         } else {
           // insert new user data if it's not in the database
-          db.query(`INSERT INTO users (name, email, password, avatar_url) VALUES ($1, $2, $3, $4) RETURNING *`, [name, email, bcrypt.hashSync(password, 10), avatar_url])
-            .then(data => {
+          db.query(
+            `INSERT INTO users (name, email, password, avatar_url) VALUES ($1, $2, $3, $4) RETURNING *`,
+            [name, email, bcrypt.hashSync(password, 10), avatar_url]
+          )
+            .then((data) => {
               req.session.userId = data.rows[0].id;
               res.status(201).send(data.rows[0]);
             })
-            .catch(err => {
-              res
-                .status(500)
-                .json({ error: err.message });
+            .catch((err) => {
+              res.status(500).json({ error: err.message });
             });
         }
       })
-      .catch(err => {
-        res
-          .status(500)
-          .json({ error: err.message });
+      .catch((err) => {
+        res.status(500).json({ error: err.message });
       });
   });
 
-  router.get('/register', (req, res) => {
+  router.get("/register", (req, res) => {
     if (req.session.userId) {
       db.query(`SELECT * FROM users WHERE id = $1`, [req.session.userId])
-        .then(data => res.send(data.rows[0]))
-        .catch(err => {
-          res
-            .status(500)
-            .json({ error: err.message });
+        .then((data) => res.send(data.rows[0]))
+        .catch((err) => {
+          res.status(500).json({ error: err.message });
         });
     } else {
-      res.render('register'); // create register form later?
-    };
+      res.render("register"); // create register form later!
+    }
   });
 
   return router;

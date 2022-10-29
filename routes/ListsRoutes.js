@@ -1,8 +1,6 @@
 const express = require("express");
 const router = express.Router();
 
-//do we want to send html error messages with validation?
-
 module.exports = (db) => {
   //CREATE one list
   router.post("/", (req, res) => {
