@@ -1,15 +1,15 @@
 ## Routes
+
 GET /
 index
 
 GET /
 about (stretch)
 
-
 ### User
 
 GET /
-profile 
+profile
 
 POST /login
 GET /login

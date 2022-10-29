@@ -17,21 +17,12 @@ const categoryIcons = {
 };
 
 $(document).ready(function () {
-  console.log("HI, FROM DOCUMENT.READY FUNCTION");
-
   const createListElement = (task) => {
-    console.log("Inside createListElement");
-    console.log("task:", task);
     listName = task.list_name;
     taskName = task.task_name;
     taskId = task.task_id;
     categoryId = task.category_id;
     listId = $("#list_id").val();
-    console.log("listName", listName);
-    console.log("taskName", taskName);
-    console.log("taskId", taskId);
-    console.log("listId", listId);
-    console.log("categoryId", categoryId);
 
     const $list = $(`
         <div class="list_container">
@@ -50,7 +41,6 @@ $(document).ready(function () {
 
         <script>
 
-
         $('.list_container > article').click(function() {
           var input = $(this).find('input');
           if (input.is(":checked")) {
@@ -61,7 +51,6 @@ $(document).ready(function () {
         })
 
         $('.list').on("click", '#editTaskIconLink-${taskId}', function() {
-
 
           $('#editTaskNameId').text('${taskName}');
           const editTaskModal = document.getElementById("editTaskModal");
@@ -101,7 +90,6 @@ $(document).ready(function () {
         });
         </script>
         `);
-    console.log("createListElement:", $list);
 
     return $list;
   };
@@ -109,7 +97,6 @@ $(document).ready(function () {
   // IMPLEMENT TO LOAD TASKS/ONE LIST USING AJAX (SIMILAR TO TWEETER)
 
   const loadList = function () {
-    console.log("loadList function");
     const listId = $("#list_id").val();
 
     $.ajax({
@@ -117,33 +104,25 @@ $(document).ready(function () {
       method: "GET",
       dataType: "json",
     }).then(function (list) {
-      $("#list_name").text(list.list[0].list_name);
-      console.log(list_name);
       //grabbing list name element from the DOM and setting its text
-
-      console.log("Success: See list", list.list[0]);
+      $("#list_name").text(list.list[0].list_name);
       renderList(list);
     });
   };
 
+  //loops through tasks and appends
   const renderList = (listData) => {
-    //loops through tasks and appends
-
     const list = listData.list;
-    console.log("list data", list);
 
+    // loops through list
     for (let i = 0; i < list.length; i++) {
-      // loops through list
-
-      console.log("task", list[i]);
-
       let task = list[i];
       task = createListElement(task);
 
-      console.log("created element task", task);
-      $(".list").append(task); // appending to the DOM
+      // appending to the DOM
       // takes return value and appends it to the listscontainer
       // to add it to the page so we can make sure it's got all the right elements, classes, etc.
+      $(".list").append(task);
     }
   };
 
