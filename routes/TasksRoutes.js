@@ -165,6 +165,7 @@ module.exports = (db) => {
     // DELETE /task/:id -- delete one task
 
     router.delete("/:id", (req, res) => { // /task/:id isn't needed - use just /:id
+      console.log("in task route delete")
       let taskId = req.params.id;
       const { userId } = req.session;
 
@@ -174,6 +175,7 @@ module.exports = (db) => {
       if (!userId) {
         return res.status(401).send("<h1>You are not logged in.</h1>"); // should this be listId?
       }
+      console.log("in task route delete before DB query")
 
       db.query(`DELETE FROM tasks WHERE id = $1 RETURNING *`,
         [taskId]
@@ -191,6 +193,7 @@ module.exports = (db) => {
             .status(500)
             .json({ error: err.message });
         });
+        console.log("in task route delete after DB")
     });
 
   });
