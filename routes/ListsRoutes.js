@@ -7,6 +7,7 @@ module.exports = (db) => {
 
   //CREATE one list
   router.post("/", (req, res) => {
+    console.log("in list route post")
     const { userId } = req.session;
 
     if (!userId) {
@@ -37,6 +38,7 @@ module.exports = (db) => {
     const icon_url = null;
 
     // // REMOVED ICON_URL for testing
+    console.log("in list route post before db query")
 
     db.query(
       `INSERT into lists (user_id, name, icon_url) VALUES ($1, $2, $3) RETURNING *`,
@@ -47,10 +49,9 @@ module.exports = (db) => {
         res.status(201).json({ message: "List created.", list });
       })
       .catch(err => {
-        res
-          .status(500)
-          .json({ error: err.message });
+        res.status(500)
       });
+      console.log("in list route post after db query")
   });
 
   //READ ALL lists
