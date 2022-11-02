@@ -10,7 +10,9 @@ INSERT INTO categories (name) VALUES
   ('Products');
 
 INSERT INTO lists (user_id, name, icon_url) VALUES
-  (3, 'Todos in Canada', null),
+  (3, 'Plan trip to Canada', null),
+  (3, 'Groceries', null),
+  (3, 'Books to read', null),
   (1, 'Summer Plan', null),
   (2, 'My Todos List', null);
 
