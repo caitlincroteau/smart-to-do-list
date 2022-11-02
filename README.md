@@ -4,7 +4,7 @@ Smart To Do List is a multi-page app that uses Open AI to automatically categori
 
 This app was designed as a Midterm project by Sarah Moss, Billy Wong, and Caitlin Croteau for Lighthouse Labs' Web Development program.
 
-!["Smart To Do Index"](https://github.com/caitlincroteau/smart-to-do-list/blob/master/public/images/smart-to-do-INDEX.png)
+!["Smart To Do Index"](https://github.com/caitlincroteau/smart-to-do-list/blob/master/public/images/Smart-to-do-INDEX-best.png)
 
 ## Getting Started
 
