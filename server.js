@@ -6,13 +6,13 @@ const PORT = process.env.PORT || 8080;
 const sassMiddleware = require("./lib/sass-middleware");
 const express = require("express");
 const app = express();
-const path = require('path');
+const path = require("path");
 const morgan = require("morgan");
-const methodOverride = require('method-override');
+const methodOverride = require("method-override");
 const cookieSession = require("cookie-session");
 
 // PG database client/connection setup
-const {Pool} = require("pg");
+const { Pool } = require("pg");
 const dbParams = require("./lib/db.js");
 const db = new Pool(dbParams);
 db.connect();
@@ -25,7 +25,7 @@ app.use(morgan("dev"));
 app.use(methodOverride("_method"));
 
 app.set("view engine", "ejs");
-app.use(express.urlencoded({extended: true}));
+app.use(express.urlencoded({ extended: true }));
 
 app.use(
   "/styles",
@@ -37,28 +37,27 @@ app.use(
 );
 
 app.use(express.static("public"));
-app.use('/public', express.static(path.join(__dirname, 'public')))
+app.use("/public", express.static(path.join(__dirname, "public")));
 
-app.use(cookieSession({
-  name: 'session',
-  keys: ['key1']
-}));
+app.use(
+  cookieSession({
+    name: "session",
+    keys: ["key1"],
+  })
+);
 
 // Separated Routes for each Resource
-// Note: Feel free to replace the example routes below with your own
 const usersRoutes = require("./routes/UsersRoutes");
 const listsRoutes = require("./routes/ListsRoutes");
 const tasksRoutes = require("./routes/TasksRoutes");
 const viewsRoutes = require("./routes/ViewsRoutes");
 
 // Mount all resource routes
-// Note: Feel free to replace the example routes below with your own
 app.use("/api/users", usersRoutes(db));
 app.use("/api/lists", listsRoutes(db));
 app.use("/api/tasks", tasksRoutes(db));
 // for page rendering
 app.use("/", viewsRoutes(db));
-
 
 app.listen(PORT, () => {
   console.log(`Example app listening on port ${PORT}`);
