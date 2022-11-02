@@ -13,11 +13,10 @@ module.exports = (db) => {
     // const userId = req.session;
 
     if (!userId) {
-      console.log("THIS IS COMING FROM LIST CREATE ROUTE");
       return res.status(401).send("<h1>You are not logged in.</h1>");
     }
 
-    const { list_name, task } = req.body;
+    const { list_name } = req.body;
 
     if (!list_name) {
       return res.status(401).send("<h1>Please input list name.</h1>");

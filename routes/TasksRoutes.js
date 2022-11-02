@@ -15,17 +15,20 @@ module.exports = (db) => {
   router.post("/", (req, res) => {
     // /task isn't needed - use just /
 
-    const { userId } = req.session;
-    const { list_id } = req.body;
-    const { task_name } = req.body;
-    const create_at = new Date();
-    //demo data - need to implement priority function later
-    const priority = true;
+    //for demo
+    const userId = 3;
+    // const { userId } = req.session;
 
     // make sure user is logged in
     if (!userId) {
       return res.status(401).send("<h1>You are not logged in.</h1>");
     }
+
+    const { list_id, task_name } = req.body;
+    const create_at = new Date();
+
+    //demo data - need to implement priority function later
+    const priority = true;
 
     let name = task_name;
 
