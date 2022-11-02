@@ -62,3 +62,6 @@ Tasks are organized into one of four categories in the database and are labelled
 3. Screen: Films or TV Series to watch.
 4. Book: Books to read.
 
+## Adding a new task
+!["Adding a new task"](https://github.com/caitlincroteau/scheduler/blob/master/docs/interview-scheduler-ADD.gif)
+
