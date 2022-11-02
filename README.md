@@ -20,42 +20,42 @@ This app was designed as a Midterm project by Sarah Moss, Billy Wong, and Caitli
 
 ## Dependencies
 
-* Node 10.x or above
-* NPM 5.x or above
-* PG 6.x
-* Express
-* Bcrypt
-* Chalk
-* Cookie-session
-* Dotenv 
-* EJS
-* Method-override
-* Morgan
-* OpenAI
-* SASS
+- Node 10.x or above
+- NPM 5.x or above
+- PG 6.x
+- Express
+- Bcrypt
+- Chalk
+- Cookie-session
+- Dotenv
+- EJS
+- Method-override
+- Morgan
+- OpenAI
+- SASS
 
 ## Using Smart To Do List
 
 ### Homepage
 
-* View all of your lists.
-* Create a new list, by clicking the plus sign icon on the bottom of the page.
-* Delete a list, by clicking on the trash bin icon next to the list you wish to delete.
-* Vist an individual list page, by clicking on the list name.
+- View all of your lists.
+- Create a new list, by clicking the plus sign icon on the bottom of the page.
+- Delete a list, by clicking on the trash bin icon next to the list you wish to delete.
+- Vist an individual list page, by clicking on the list name.
 
 ### Individual List page
 
-* View all tasks connected to the list.
-* Create a new task, by clicking the plus sign icon on the bottom of the page.
-* Delete a task, by clicking on the trash bin icon next to the task you wish to delete.
-* Edit a task name, by clicking on the note pad icon next to the task you wish to edit.
-* Deselect a task, by clicking the checkbox next to the task. In future versions of the app, this will 'cross' the task off your list.
+- View all tasks connected to the list.
+- Create a new task, by clicking the plus sign icon on the bottom of the page.
+- Delete a task, by clicking on the trash bin icon next to the task you wish to delete.
+- Edit a task name, by clicking on the note pad icon next to the task you wish to edit.
+- Deselect a task, by clicking the checkbox next to the task. In future versions of the app, this will 'cross' the task off your list.
 
 ### Categories
 
 [OpenAI's API](https://openai.com/api/) will automatically categorize each task for you when the task is created. When the task is edited, the AI will update the task category if required.
 
-Tasks are organized into one of four categories in the database and are labelled with one of the four corresponding category icons: 
+Tasks are organized into one of four categories in the database and are labelled with one of the four corresponding category icons:
 
 1. Burger: Restaurants or Cafes to visit or things to eat.
 2. Shopping Cart: Products to buy.
@@ -63,5 +63,5 @@ Tasks are organized into one of four categories in the database and are labelled
 4. Book: Books to read.
 
 ## Adding a new task
-!["Adding a new task"](https://github.com/caitlincroteau/scheduler/blob/master/docs/interview-scheduler-ADD.gif)
 
+!["Adding a new task"](https://github.com/caitlincroteau/smart-to-do-list/blob/master/public/images/Smart-to-do-GIF-ADD-TASK.gif)
