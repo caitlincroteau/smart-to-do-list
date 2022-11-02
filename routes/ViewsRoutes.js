@@ -27,23 +27,5 @@ module.exports = (db) => {
     res.render("list", templateVars);
   });
 
-  // // TEMPORTARY FOR LAYOUT TESTING
-  // router.get("/task_edit_modal", (req, res) => {
-  //   console.log('Hello Edit Task Modal!');
-  //   res.render("task_edit_modal");
-  // });
-
-  // // TEMPORTARY FOR LAYOUT TESTING
-  // router.get("/task_create_modal", (req, res) => {
-  //   console.log('Hello Create Task Modal!');
-  //   res.render("task_create_modal");
-  // });
-
-  // // TEMPORTARY FOR LAYOUT TESTING
-  // router.get("/list_create_modal", (req, res) => {
-  //   console.log('Hello Create List Modal!');
-  //   res.render("list_create_modal");
-  // });
-
   return router;
 };
