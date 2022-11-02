@@ -12,8 +12,8 @@ This app was designed as a Midterm project by Sarah Moss, Billy Wong, and Caitli
 2. Clone your repository onto your local device.
 3. Install dependencies using the npm install command.
 4. Fix to binaries for sass: `npm rebuild node-sass`
-5. Reset database: `npm run db:reset`
-6. Check the db folder to see what gets created and seeded in the SDB
+5. Create a new database.
+6. Seed the database by running: `npm run db:reset`
 7. Create the .env by using .env.example as a reference.
 8. Configure your .env file with your correct local information.
 9. In order to access [OpenAI's API](https://openai.com/api/), you will need to get a key and add it to the .env file.
@@ -49,8 +49,8 @@ This app was designed as a Midterm project by Sarah Moss, Billy Wong, and Caitli
 
 - View all tasks connected to the list.
 - Create a new task, by clicking the plus sign icon on the bottom of the page.
-- Delete a task, by clicking on the trash bin icon next to the task you wish to delete.
-- Edit a task name, by clicking on the note pad icon next to the task you wish to edit.
+- Delete a task, by clicking on the trash bin icon next to the task you wish to delete (_to be implemented_).
+- Edit a task name, by clicking on the note pad icon next to the task you wish to edit (_to be implemented_).
 - Deselect a task, by clicking the checkbox next to the task. In future versions of the app, this will 'cross' the task off your list.
 
 ### Categories
