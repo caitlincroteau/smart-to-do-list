@@ -11,13 +11,17 @@ const express = require("express");
 const router = express.Router();
 
 module.exports = (db) => {
+
+  //for demo purposes
+  const email = "billywong@outlook.com";
+  const password = "password";
+  const name = "Billy Wong";
+  const userIdDemo = 3;
+  const avatar_url = null;
+
   // login routes
   router.post("/login", (req, res) => {
     // const { email, password } = req.body;
-
-    //for demo purposes
-    const email = "billywong@outlook.com";
-    const password = "password";
 
     db.query(`SELECT * FROM users WHERE email = $1`, [email])
       .then((data) => {
@@ -26,8 +30,7 @@ module.exports = (db) => {
           bcrypt.compareSync(password, data.rows[0].password)
         ) {
           //uses id 3 for demo purpose
-          req.session.userId = 3;
-          //for demo purposes
+          req.session.userId = userIdDemo;
           // req.session.userId = data.rows[0].id; // set cookies
           res.redirect("/");
         } else {
@@ -60,14 +63,6 @@ module.exports = (db) => {
   router.post("/register", (req, res) => {
     // const {name, email, password, avatar_url} = req.body
 
-    //for demo purposes
-    const [name, email, password, avatar_url] = [
-      "Jon Smith",
-      "jon-smith99@hotmail.com",
-      "myPassword",
-      null,
-    ];
-
     if (!name || !email || !password)
       return res
         .status(400)
@@ -87,7 +82,7 @@ module.exports = (db) => {
           )
             .then((data) => {
               //for demo purposes
-              req.session.userId = 3;
+              req.session.userId = userIdDemo;
               // req.session.userId = data.rows[0].id;
               res.status(201).send(data.rows[0]);
             })

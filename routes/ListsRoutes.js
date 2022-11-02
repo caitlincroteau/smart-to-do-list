@@ -2,13 +2,18 @@ const express = require("express");
 const router = express.Router();
 
 module.exports = (db) => {
+  //for demo purposes
+  const userIdDemo = 3;
+  const icon_url = null;
+
   //CREATE one list
   router.post("/", (req, res) => {
     //uses id 3 for demo purpose
-    const { userId } = 3;
-    // const { userId } = req.session;
+    const userId = userIdDemo;
+    // const userId = req.session;
 
     if (!userId) {
+      console.log("THIS IS COMING FROM LIST CREATE ROUTE");
       return res.status(401).send("<h1>You are not logged in.</h1>");
     }
 
@@ -17,11 +22,6 @@ module.exports = (db) => {
     if (!list_name) {
       return res.status(401).send("<h1>Please input list name.</h1>");
     }
-
-    const icon_url = null;
-
-    // // REMOVED ICON_URL for testing
-    console.log("in list route post before db query");
 
     db.query(
       `INSERT into lists (user_id, name, icon_url) VALUES ($1, $2, $3) RETURNING *`,
@@ -35,13 +35,12 @@ module.exports = (db) => {
       .catch((err) => {
         res.status(500);
       });
-    console.log("in list route post after db query");
   });
 
   //READ ALL lists
   router.get("/", (req, res) => {
     //uses id 3 for demo purpose
-    const { userId } = 3;
+    const userId = userIdDemo;
     // const { userId } = req.session;
 
     db.query(`SELECT * FROM lists WHERE user_id = $1`, [userId])
@@ -72,7 +71,7 @@ module.exports = (db) => {
       .then((data) => {
         // grab all rows in order to grab all tasks
         const list = data.rows;
-        console.log("list in listsRoutes", list);
+
         if (!list) {
           return res.status(404).send("<h1>List not found!</h1>");
         }
@@ -85,17 +84,16 @@ module.exports = (db) => {
   });
 
   //UPDATE one list
+  //need to add button and implement this route
   router.put("/:id", (req, res) => {
-    const { id } = req.params;
-    // const { name, icon_url } = req.body; //is this correct?
-    // const { userId } = req.session;
-    // if (!userId) {
-    //   return res.status(401).send("<h1>You are not logged in.</h1>");
-    // }
+    const userId = userIdDemo;
 
-    //dummy data
-    const name = "things NOT to eat";
-    const icon_url = "url";
+    const { id } = req.params;
+    const { name, icon_url } = req.body;
+
+    if (!userId) {
+      return res.status(401).send("<h1>You are not logged in.</h1>");
+    }
 
     db.query(
       `UPDATE lists SET name = $2, icon_url = $3 WHERE id = $1 RETURNING *`,
@@ -115,11 +113,13 @@ module.exports = (db) => {
 
   //DELETE one list
   router.delete("/:id/delete", (req, res) => {
+    const userId = userIdDemo;
+    // const userId = req.session;
     const { id } = req.params;
-    // const { userId } = req.session;
-    // if (!userId) {
-    //   return res.status(401).send("<h1>You are not logged in.</h1>");
-    // }
+
+    if (!userId) {
+      return res.status(401).send("<h1>You are not logged in.</h1>");
+    }
 
     db.query(`DELETE FROM lists WHERE id = $1 RETURNING *`, [id])
       .then((data) => {
