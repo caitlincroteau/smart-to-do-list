@@ -25,7 +25,10 @@ module.exports = (db) => {
           data.rowCount > 0 &&
           bcrypt.compareSync(password, data.rows[0].password)
         ) {
-          req.session.userId = data.rows[0].id; // set cookies
+          //uses id 3 for demo purpose
+          req.session.userId = 3;
+          //for demo purposes
+          // req.session.userId = data.rows[0].id; // set cookies
           res.redirect("/");
         } else {
           res.status(400).send("<h1>Please check your email and password</h1>");
@@ -83,7 +86,9 @@ module.exports = (db) => {
             [name, email, bcrypt.hashSync(password, 10), avatar_url]
           )
             .then((data) => {
-              req.session.userId = data.rows[0].id;
+              //for demo purposes
+              req.session.userId = 3;
+              // req.session.userId = data.rows[0].id;
               res.status(201).send(data.rows[0]);
             })
             .catch((err) => {

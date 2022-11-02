@@ -4,8 +4,9 @@ const router = express.Router();
 module.exports = (db) => {
   //CREATE one list
   router.post("/", (req, res) => {
-    console.log("in list route post");
-    const { userId } = req.session;
+    //uses id 3 for demo purpose
+    const { userId } = 3;
+    // const { userId } = req.session;
 
     if (!userId) {
       return res.status(401).send("<h1>You are not logged in.</h1>");
@@ -17,21 +18,6 @@ module.exports = (db) => {
       return res.status(401).send("<h1>Please input list name.</h1>");
     }
 
-    // // const {list_name} = req.body;
-    // // let name = list_name;
-
-    // // console.log('LIST_NAME:', list_name);
-    // console.log('REQ.BODY:', req.body);
-    // // if (!name || !icon_url) {
-    // //   return res.status(401).send("<h1>Please input list name and icon.</h1>");
-    // // }
-
-    // // DUMMY DATA FOR TESTING
-    // // const userId = 1;
-    // // const name = "things to eat";
-    // // const icon_url = 'url';
-
-    // // DO WE WANT TO KEEP THIS - IS THIS FOR THE USER ICON OR LIST ICON??
     const icon_url = null;
 
     // // REMOVED ICON_URL for testing
@@ -54,7 +40,9 @@ module.exports = (db) => {
 
   //READ ALL lists
   router.get("/", (req, res) => {
-    const { userId } = req.session;
+    //uses id 3 for demo purpose
+    const { userId } = 3;
+    // const { userId } = req.session;
 
     db.query(`SELECT * FROM lists WHERE user_id = $1`, [userId])
       .then((data) => {

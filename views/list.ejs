@@ -1,92 +1,106 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <title>List Page</title>
 
-<head>
-  <title>List Page</title>
+    <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" type="text/css" />
+    <link rel="stylesheet" href="/vendor/border-box.css" type="text/css" />
 
-  <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" type="text/css" />
-  <link rel="stylesheet" href="/vendor/border-box.css" type="text/css" />
+    <!-- <link rel="stylesheet" href="/styles/main.css" type="text/css" /> -->
+    <link rel="stylesheet" href="/styles/layout.css" type="text/css" />
+    <link rel="stylesheet" href="/styles/list.css" type="text/css" />
 
-  <!-- <link rel="stylesheet" href="/styles/main.css" type="text/css" /> -->
-  <link rel="stylesheet" href="/styles/layout.css" type="text/css" />
-  <link rel="stylesheet" href="/styles/list.css" type="text/css" />
+    <!-- Link createlist modal form styling -->
+    <link rel="stylesheet" href="/styles/modal_edit_task.css" type="text/css" />
+    <link
+      rel="stylesheet"
+      href="/styles/modal_create_task.css"
+      type="text/css"
+    />
 
+    <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
 
-  <!-- Link createlist modal form styling -->
-  <link rel="stylesheet" href="/styles/modal_edit_task.css" type="text/css" />
-  <link rel="stylesheet" href="/styles/modal_create_task.css" type="text/css" />
+    <!-- link bootstrap -->
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.2.0-beta1/js/bootstrap.min.js"
+      integrity="sha512-Hqe3s+yLpqaBbXM6VA0cnj/T56ii5YjNrMT9v+us11Q81L0wzUG0jEMNECtugqNu2Uq5MSttCg0p4KK0kCPVaQ=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
 
-  <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
+    <!-- load custom fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
+      rel="stylesheet"
+    />
+    <!-- link font awesome for icons from cdnjs.com -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
+      integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+  </head>
 
-  <!-- link bootstrap -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.2.0-beta1/js/bootstrap.min.js" integrity="sha512-Hqe3s+yLpqaBbXM6VA0cnj/T56ii5YjNrMT9v+us11Q81L0wzUG0jEMNECtugqNu2Uq5MSttCg0p4KK0kCPVaQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <body class="list_page">
+    <!-- include nav bar -->
+    <%- include('partials/_nav') %>
 
-  <!-- load custom fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
-  <!-- link font awesome for icons from cdnjs.com -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-</head>
-
-<body class="list_page">
-  <!-- include nav bar -->
-  <%- include('partials/_nav') %>
-
-  <header class="list_header">
-    <h1 id="list_name"></h1>
+    <header class="list_header">
+      <h1 id="list_name"></h1>
       <!-- <h3 id="header_message">Here are your tasks!</h3> -->
-  </header>
+    </header>
 
-<div class="list"></div>
+    <div class="list"></div>
 
-  <input type='hidden' value="<%= id %>" id = "list_id">
+    <input type="hidden" value="<%= id %>" id="list_id" />
 
-  <!-- EDIT TASK MODAL
+    <!-- EDIT TASK MODAL
   <!-- <span class="edit-modal-link" id="editTaskModalLink"><i class="fa-solid fa-plus"></i></span> -->
-  <!-- <button id="modalLink" class="modal-link">Click Here</button> -->
+    <!-- <button id="modalLink" class="modal-link">Click Here</button> -->
 
-  <div class="edit-task-modal" id="editTaskModal">
-    <div class="edit-task-modal-content" id="editModalContentBox">
-      <!-- &times; gives us close icon -->
-      <span class="edit-close-modal-button" id="closeEditModalButton">&times;</span>
-      <h3>Edit task: <span id="editTaskNameId"></span></h3>
-      <form id="editTaskForm" method="POST" action="/api/tasks/">
-            <label for="task-name">New task name:</label>
-            <input type="text" id="new_task_name" name="task_name">
-            <button type="submit" formmethod="PUT">Submit</button>
-      </form>
+    <div class="edit-task-modal" id="editTaskModal">
+      <div class="edit-task-modal-content" id="editModalContentBox">
+        <!-- &times; gives us close icon -->
+        <span class="edit-close-modal-button" id="closeEditModalButton"
+          >&times;</span
+        >
+        <h3>Edit task: <span id="editTaskNameId"></span></h3>
+        <form id="editTaskForm" method="POST" action="/api/tasks/">
+          <label for="task-name">New task name:</label>
+          <input type="text" id="new_task_name" name="task_name" />
+          <button type="submit" formmethod="PUT">Submit</button>
+        </form>
+      </div>
     </div>
-  </div>
 
-  <!-- CREATE TASK MODAL LINK -->
-  <span class="modal-link" id="modalLink">
-    <i class="fa-solid fa-plus"></i>  <strong>  New Task</strong>
-  </span>
+    <!-- CREATE TASK MODAL LINK -->
+    <span class="modal-link" id="modalLink">
+      <i class="fa-solid fa-plus"></i> <strong> New Task</strong>
+    </span>
 
-  <!-- CREATE TASK MODAL -->
-  <div id="createTaskModal" class="task-modal">
-    <div class="task-modal-content">
-      <!-- &times; gives us close icon -->
-      <span class="close-modal-button" id="closeModalButton">&times;</span>
-      <h3>Create new task!</h3>
+    <!-- CREATE TASK MODAL -->
+    <div id="createTaskModal" class="task-modal">
+      <div class="task-modal-content">
+        <!-- &times; gives us close icon -->
+        <span class="close-modal-button" id="closeModalButton">&times;</span>
+        <h3>Create new task!</h3>
 
-      <form method="POST" action="/api/tasks">
-            <label for="task-name">Task Name:</label>
-            <input type="hidden" name="list_id" value="<%= id %>">
-            <input type="text" id="task_name" name="task_name">
-            <button>Submit</button>
-            <p>Your task will be auto-categorized upon submission.</p>
-      </form>
+        <form method="POST" action="/api/tasks">
+          <label for="task-name">Task Name:</label>
+          <input type="hidden" name="list_id" value="<%= id %>" />
+          <input type="text" id="task_name" name="task_name" />
+          <button>Submit</button>
+          <p>Your task will be auto-categorized upon submission.</p>
+        </form>
+      </div>
     </div>
-  </div>
 
-
-  <script type="text/javascript" src="/scripts/create_edit_task.js"></script>
-  <script defer type="text/javascript" src="/scripts/list_show.js"></script>
-  <script>
-
-</script>
-</body>
-
+    <script type="text/javascript" src="/scripts/create_edit_task.js"></script>
+    <script defer type="text/javascript" src="/scripts/list_show.js"></script>
+    <script></script>
+  </body>
 </html>
